@@ -33,16 +33,11 @@ for image in images:
         label_file.write('0 {} {} {} {} '.format(str((xtl + (w / 2)) / width), str((ytl + (h / 2)) / height),
                                                  str(w / width), str(h / height)))
 
-        points = e.attributes['points']
-        points = points.value.split(';')
-        points_ = []
-        for p in points:
-            p = p.split(',')
-            p1, p2 = p
-            points_.append([int(float(p1)), int(float(p2))])
-        for p_, p in enumerate(points_):
-            label_file.write('{} {}'.format(p[0] / width, p[1] / height))
-            if p_ < len(points_) - 1:
+        for i, p in enumerate(points):
+            p1, p2 = map(lambda x: int(float(x)), p.split(','))
+            label_file.write(f'{p1 / width} {p2 / height}')
+            if i < len(points) - 1:
                 label_file.write(' ')
             else:
                 label_file.write('\n')
+                
